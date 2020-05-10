@@ -18,7 +18,7 @@ module.exports.textHandler = async bot => {
 // Default answer to unknown messages
 const privateChat = ctx => {
   ctx.reply(
-    `Hello ${ctx.from.first_name} this is tkf tip bot.\nSee /help for more info.`,
+    `Hello ${ctx.from.first_name} you need help?.\nSee /help for more info.`,
     Markup.keyboard([
       ["/balance", "/help"],
       ["/deposit", "/withdraw"]
@@ -31,36 +31,36 @@ const privateChat = ctx => {
 
 const groupChat = async ctx => {
   /// Listen for Tip Message from Group Chat
-  // RegEx "[number] tkf";
-  // Example: "10 tkf" , " 10tkf" , "10 tkf";
+  // RegEx "[number] honk";
+  // Example: "10 cocoa" , "10cocoa" , "10 CocoA";
 
   const re = /[0-9]+ *tkf/gi;
-  const reComma = /(\d{0,3},)?(\d{3},)?\d{0,3} *tkf/gi;
+  const reComma = /(\d{0,3},)?(\d{3},)?\d{0,3} *tkf/i;
   const reDot = /\d*\.?\d* *tkf/gi;
   const reClown = /🎈/g;
-  const reCircus = /💊/g;
+  const reCircus = /🎁/g;
 
   if (ctx.message.reply_to_message) {
     let text = ctx.message.text;
-    const banMsg = '😢 Your account has been suspended!';
+    const banMsg = 'Sorry your account has been suspended!🤕';
 
     if (parseFloat(text.match(reDot)) || parseFloat(text.match(reComma))) {
       text = text.includes(".") ? text.match(reDot)[0] : text.match(reComma)[0];
 
       if (text.includes(".")) {
-        // With dot "[number].[number] tkf"
+        // With dot "[number].[number] honk"
         ctx.replyWithMarkdown(
-          `*${ctx.from.first_name}* the lowest amount to give/send/tip is 1 TKF. Please check your amount and try again.`
+          `*${ctx.from.first_name}*🤕 the lowest amount to give/send/tip is 1 cocoa. check your amount! .`
         );
       } else if (text.includes(",")) {
-        // With comma "[number],[number] tkf"
+        // With comma "[number],[number] honk"
         let amount = text.replace(/,/g, "");
 
         if (isBanned(ctx.from.id)) return ctx.reply(banMsg);
         const tipResult = await tip(ctx, amount);
         ctx.replyWithMarkdown(tipResult);
       } else if (text.match(re)) {
-        //"[number] tkf"
+        //"[number] honk"
         let amount = ctx.message.text.match(re)[0].split(" ")[0];
 
         if (isBanned(ctx.from.id)) return ctx.reply(banMsg);
@@ -118,10 +118,12 @@ const tip = async (ctx, amount) => {
   if (transactionSuccess) {
     msg += `*${fromUser.first_name}* sent ${amount.toLocaleString(
       "en-US"
-    )} 💸*TKF* to *${toUser.first_name}*`;
+    )} *TKF*💰to *${toUser.first_name}*`;
   } else {
-    console.log("Need more TKF");
-    msg += `*${fromUser.first_name}* you need more *TKF*❌`;
+    console.log("Need more COCOA");
+    msg += `*${fromUser.first_name}* you need more *TKF*💰`;
   }
   return msg;
 };
+
+  
