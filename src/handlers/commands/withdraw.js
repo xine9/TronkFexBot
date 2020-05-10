@@ -60,10 +60,10 @@ module.exports.withdraw = async ctx => {
       msg += withdrawResult;
     } else {
       if (amount < withdrawLimit) {
-        msg += `Withdraw limit : ${withdrawLimit}`;
+        msg += `The minimum withdrawal is : ${withdrawLimit} TKF💰`;
       } else if (wallet.tkfPoints < amount) {
         //Not enough
-        msg += `Wrong amount ${args[0]}, you don't have enough tokens:${wallet.tkfPoints}`;
+        msg += `You don't have enough tokens, you have : ${wallet.tkfPoints} TKF💰`;
       } else if (delta < withdrawDelayTime) {
         const left = (withdrawDelayTime - delta).toFixed(2);
         msg += `Sorry, you can't withdraw tokens during: ${left} min.\nPlease wait.`;
