@@ -42,7 +42,7 @@ const groupChat = async ctx => {
 
   if (ctx.message.reply_to_message) {
     let text = ctx.message.text;
-    const banMsg = '🤷‍♂️ Your account has been suspended!';
+    const banMsg = '😢 Your account has been suspended!';
 
     if (parseFloat(text.match(reDot)) || parseFloat(text.match(reComma))) {
       text = text.includes(".") ? text.match(reDot)[0] : text.match(reComma)[0];
