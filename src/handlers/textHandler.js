@@ -35,10 +35,10 @@ const groupChat = async ctx => {
   // Example: "10 tkf" , " 10tkf" , "10 tkf";
 
   const re = /[0-9]+ *tkf/gi;
-  const reComma = /(\d{0,3},)?(\d{3},)?\d{0,3} *tkf/i;
+  const reComma = /(\d{0,3},)?(\d{3},)?\d{0,3} *tkf/gi;
   const reDot = /\d*\.?\d* *tkf/gi;
-  const reClown = /👏/g;
-  const reCircus = /✌/g;
+  const reClown = /🎈/g;
+  const reCircus = /💊/g;
 
   if (ctx.message.reply_to_message) {
     let text = ctx.message.text;
